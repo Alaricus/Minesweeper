@@ -157,9 +157,13 @@
     if (neighbors.length === 0) { return; }
 
     neighbors.forEach(item => {
-      if (getWarningNumber(item.row, item.col) === 0) {
-        document.querySelector(`#_${item.row}_${item.col}`).classList.add('clear');
+      const cell = document.querySelector(`#_${item.row}_${item.col}`);
+      const warningNumber = getWarningNumber(item.row, item.col);
+      cell.classList.add('clear');
+      if (warningNumber === 0) {
         clearEmptySpace(item.row, item.col);
+      } else {
+        cell.textContent = warningNumber;
       }
     });
   };
