@@ -1,36 +1,45 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
   font-weight: 400;
   padding: 0;
   margin: 0;
   text-align: center;
+  background-color: #50565e;
 }
 
 header {
   padding: 20px;
   margin: 0;
   color: #ffffff;
-  background-color: #292c30;
+  background-color: var(--dark);
   text-align: left;
+  font-size: 1.5rem;
 }
 
 input {
   border: none;
   border-radius: 3px;
+  padding: 0 5px;
   margin: 0 40px 0 0;
-  height: 16px;
+  font-size: 1.25rem;
+  background-color: #dddddd;
+  width: 3rem;
 }
 
 input[type=button] {
   cursor: pointer;
+  width: 6rem;
+  border: 2px solid var(--victory);
+  margin-left: 2rem;
 }
 
 .field {
   position: relative;
   display: none;
-  border: 3px solid #aaaaaa;
+  font-size: 12px;
+  border: 3px solid var(--silver);
   padding: 0;
+  background-color: #eeeeee;
 }
 
 .row {
@@ -43,7 +52,7 @@ input[type=button] {
 .cell {
   display: inline-flex;
   border: 1px solid #000000;
-  background-color: #aaaaaa;
+  background-color: var(--silver);
   height: 40px;
   width: 40px;
   padding: 0;
@@ -60,17 +69,17 @@ input[type=button] {
 }
 
 .mine {
-  background-color: #d80000;
+  background-color: var(--defeat);
 }
 
 .flag {
-  background-color: #40b700;
+  background-color: var(--victory);;
 }
 
 .hover {
   transform: scale(1.4);
   border-color: #000000;
-  box-shadow: 0 0 1rem #292c30;
+  box-shadow: 0 0 1rem var(--dark);
 }
 
 .buffer {
@@ -79,7 +88,7 @@ input[type=button] {
 
 .victory {
   height: 6rem;
-  background-color: #40b700;
+  background-color: var(--victory);;
   color: #ffffff;
   font-size: 5rem;
   margin-bottom: 20px;
@@ -87,7 +96,7 @@ input[type=button] {
 
 .defeat {
   height: 6rem;
-  background-color: #b70000;
+  background-color: var(--defeat);
   color: #ffffff;
   font-size: 5rem;
   margin-bottom: 20px;
@@ -98,26 +107,37 @@ input[type=button] {
     transform: rotate(360deg);
   }
 }
+
 @keyframes explode {
   0% {
-    background-color: red;
+    background-color: #ff0000;
     left: 0;
   }
+
   25% {
-    background-color: orange;
+    background-color: #ffa500;
     left: 6rem;
   }
-  50% {
-    background-color: yellow;
-    left: 0;
 
+  50% {
+    background-color: #ffff00;
+    left: 0;
   }
+
   75% {
-    background-color: black;
+    background-color: #000000;
     left: -6rem;
   }
+
   100% {
-    background-color: white;
+    background-color: #ffffff;
     left: 0;
   }
+}
+
+:root {
+  --defeat: #b70000;
+  --victory: #40b700;
+  --dark: #292c30;
+  --silver: #aaaaaa;
 }
