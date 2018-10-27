@@ -1,0 +1,123 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+header {
+  padding: 20px;
+  margin: 0;
+  color: #ffffff;
+  background-color: #292c30;
+  text-align: left;
+}
+
+input {
+  border: none;
+  border-radius: 3px;
+  margin: 0 40px 0 0;
+  height: 16px;
+}
+
+input[type=button] {
+  cursor: pointer;
+}
+
+.field {
+  position: relative;
+  display: none;
+  border: 3px solid #aaaaaa;
+  padding: 0;
+}
+
+.row {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.cell {
+  display: inline-flex;
+  border: 1px solid #000000;
+  background-color: #aaaaaa;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  margin: 2px;
+  justify-content: space-around;
+  align-items: center;
+  transition: all .25s ease;
+  cursor: pointer;
+}
+
+.clear {
+  background-color: #ffffff;
+  cursor: default;
+}
+
+.mine {
+  background-color: #d80000;
+}
+
+.flag {
+  background-color: #40b700;
+}
+
+.hover {
+  transform: scale(1.4);
+  border-color: #000000;
+  box-shadow: 0 0 1rem #292c30;
+}
+
+.buffer {
+  height: 20px;
+}
+
+.victory {
+  height: 6rem;
+  background-color: #40b700;
+  color: #ffffff;
+  font-size: 5rem;
+  margin-bottom: 20px;
+}
+
+.defeat {
+  height: 6rem;
+  background-color: #b70000;
+  color: #ffffff;
+  font-size: 5rem;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes explode {
+  0% {
+    background-color: red;
+    left: 0;
+  }
+  25% {
+    background-color: orange;
+    left: 6rem;
+  }
+  50% {
+    background-color: yellow;
+    left: 0;
+
+  }
+  75% {
+    background-color: black;
+    left: -6rem;
+  }
+  100% {
+    background-color: white;
+    left: 0;
+  }
+}
