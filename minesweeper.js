@@ -86,7 +86,7 @@
   const handleClick = (e) => {
     const coords = e.target.id.split('_');
     const row = parseInt(coords[1]);
-    const col =  parseInt(coords[2]);
+    const col = parseInt(coords[2]);
     let cell = board[row][col];
 
     if (firstMove && cell === 1) {
@@ -98,8 +98,6 @@
     if (e.target.classList.contains('flag')) { return; }
 
     if (cell === 1) {
-      e.target.classList.add('mine');
-      e.target.textContent = '💣';
       handleDefeat();
       return;
     } else {
@@ -185,6 +183,15 @@
   const handleDefeat = () => {
     playSound('defeat');
     const allCells = document.querySelectorAll('.cell');
+    [...allCells].forEach((cell) => {
+      const coords = cell.id.split('_');
+      const row = parseInt(coords[1]);
+      const col = parseInt(coords[2]);
+      if (board[row][col] === 1) {
+        cell.classList.add('mine');
+        cell.textContent = '💣';
+      }
+    });
     lockBoard(allCells);
     field.style.animation = 'explode 0.75s linear 1';
     buffer.classList.add('defeat');
