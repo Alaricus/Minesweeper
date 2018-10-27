@@ -93,7 +93,6 @@
       addMine(parseInt(dimensions[0].value), parseInt(dimensions[1].value));
       board[row][col] = 0;
       cell = 0;
-      console.log(board);
     }
 
     if (e.target.classList.contains('flag')) { return; }
@@ -115,7 +114,7 @@
         playSound('warning');
       }
 
-      firstMove = !firstMove;
+      firstMove = false;
     }
 
     e.target.classList.remove('hover');
@@ -214,7 +213,6 @@
     placeSquares();
 
     firstMove = true;
-    console.log(board);
 
     field.style.animation = 'none';
     buffer.textContent = '';
