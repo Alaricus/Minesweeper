@@ -11,6 +11,7 @@
   });
 
   let board = [];
+  let firstMove = true;
 
   window.addEventListener('selectstart', (e) => { e.preventDefault(); }, false);
 
@@ -35,9 +36,18 @@
   const seed = (w, h) => {
     const mines = Math.ceil((w * h) * 0.1);
     for (let i = 0; i < mines; i++) {
-      const row = Math.floor((Math.random() * (h - 1)));
-      const col = Math.floor((Math.random() * (w - 1)));
+      addMine(w, h);
+    }
+  };
+
+  const addMine = (w, h) => {
+    const row = Math.floor((Math.random() * (h - 1)));
+    const col = Math.floor((Math.random() * (w - 1)));
+
+    if (board[row][col] === 0) {
       board[row][col] = 1;
+    } else {
+      addMine(w, h);
     }
   };
 
@@ -77,8 +87,14 @@
     const coords = e.target.id.split('_');
     const row = parseInt(coords[1]);
     const col =  parseInt(coords[2]);
-    const cell = board[row][col];
-    const warningNumber = getWarningNumber(row, col);
+    let cell = board[row][col];
+
+    if (firstMove && cell === 1) {
+      addMine(parseInt(dimensions[0].value), parseInt(dimensions[1].value));
+      board[row][col] = 0;
+      cell = 0;
+      console.log(board);
+    }
 
     if (e.target.classList.contains('flag')) { return; }
 
@@ -88,6 +104,7 @@
       handleDefeat();
       return;
     } else {
+      const warningNumber = getWarningNumber(row, col);
       e.target.classList.add('clear');
       e.target.textContent = warningNumber > 0 ? warningNumber : '';
 
@@ -97,6 +114,8 @@
       } else {
         playSound('warning');
       }
+
+      firstMove = !firstMove;
     }
 
     e.target.classList.remove('hover');
@@ -193,6 +212,9 @@
     seed(w, h);
     placeRows();
     placeSquares();
+
+    firstMove = true;
+    console.log(board);
 
     field.style.animation = 'none';
     buffer.textContent = '';
