@@ -1,6 +1,6 @@
 # Minesweeper
 
-My version of Minesweeper. [Try out](https://alaricus.github.io/Minesweeper/)
+My version of Minesweeper: [try out](https://alaricus.github.io/Minesweeper/).
 
 ## Authors
 
