@@ -10,6 +10,7 @@
     });
   });
 
+  let firstMoveMade = false;
   let board = [];
 
   window.addEventListener('selectstart', (e) => { e.preventDefault(); }, false);
@@ -19,6 +20,7 @@
     const width = parseInt(dimensions[0].value);
     const height = parseInt(dimensions[1].value);
     const temp = [];
+    firstMoveMade = false;
 
     for (let i = 0; i < height; i++) {
       const row = [];
@@ -77,7 +79,25 @@
     const coords = e.target.id.split('_');
     const row = parseInt(coords[1]);
     const col =  parseInt(coords[2]);
-    const cell = board[row][col];
+    let cell = board[row][col];
+
+    if (!firstMoveMade) {
+      firstMoveMade = true;
+      if (cell === 1) {
+        if (board[0][0] === 0) {
+          board[0][0] = 1;
+        } else if (board[0][board[0].length-1] === 0) {
+          board[0][board[0].length-1] = 1;
+        } else if (board[board.length-1][0] === 0) {
+          board[board.length-1][0] = 1;
+        } else if (board[board.length-1][board[0].length-1] === 0) {
+          board[board.length-1][board[0].length-1] = 1;
+        }
+        cell = 0;
+        board[row][col] = 0;
+      }
+    }    
+
     const warningNumber = getWarningNumber(row, col);
 
     if (e.target.classList.contains('flag')) { return; }
