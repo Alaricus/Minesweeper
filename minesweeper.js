@@ -2,6 +2,7 @@
   const buffer = document.querySelector('.buffer');
   const field = document.querySelector('.field');
   const start = document.querySelector('input[type="button"]');
+  const sounds = document.querySelectorAll('audio');
   const dimensions = document.querySelectorAll('input[type="number"]');
   [...dimensions].forEach((dim) => {
     dim.addEventListener('change', (e) => {
@@ -89,7 +90,13 @@
     } else {
       e.target.classList.add('clear');
       e.target.textContent = warningNumber > 0 ? warningNumber : '';
-      warningNumber === 0 && clearEmptySpace(row, col);
+
+      if (warningNumber === 0) {
+        clearEmptySpace(row, col);
+        playSound('clear');
+      } else {
+        playSound('warning');
+      }
     }
 
     e.target.classList.remove('hover');
@@ -103,9 +110,11 @@
       if (!e.target.classList.contains('flag')) {
         e.target.classList.add('flag');
         e.target.textContent = '🚩';
+        playSound('flagup');
       } else {
         e.target.classList.remove('flag');
         e.target.textContent = '';
+        playSound('flagdown');
       }
     }
   };
@@ -147,6 +156,7 @@
     });
 
     if (won) {
+      playSound('victory');
       lockBoard(allCells);
       field.style.animation = 'spin 1s linear 1';
       buffer.classList.add('victory');
@@ -155,6 +165,7 @@
   };
 
   const handleDefeat = () => {
+    playSound('defeat');
     const allCells = document.querySelectorAll('.cell');
     lockBoard(allCells);
     field.style.animation = 'explode 0.75s linear 1';
@@ -170,7 +181,15 @@
     });
   };
 
+  const playSound = (soundName) => {
+    const audio = [...sounds].find(sound => sound.id === soundName);
+    audio.volume = 0.25;
+    audio.paused ? audio.play() : audio.currentTime = 0;
+  };
+
   const init = (w, h) => {
+    playSound('start');
+
     seed(w, h);
     placeRows();
     placeSquares();
