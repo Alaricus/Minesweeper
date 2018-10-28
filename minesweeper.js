@@ -6,7 +6,7 @@
   const dimensions = document.querySelectorAll('input[type="number"]');
   [...dimensions].forEach((dim) => {
     dim.addEventListener('change', (e) => {
-      dim.value = dim.value > 15 || dim.value < 1 || dim.value % 1 !== 0 ? 7 : dim.value;
+      dim.value = dim.value > 20 || dim.value < 1 || dim.value % 1 !== 0 ? 12 : dim.value;
     });
   });
 

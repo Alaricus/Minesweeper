@@ -5,6 +5,12 @@ body {
   margin: 0;
   text-align: center;
   background-color: #50565e;
+  background-image: url("minefield.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+
 }
 
 header {
@@ -12,32 +18,38 @@ header {
   margin: 0;
   color: #ffffff;
   background-color: var(--dark);
-  text-align: left;
   font-size: 1.5rem;
 }
 
 input {
   border: none;
-  border-radius: 3px;
+  border-radius: 12px;
   padding: 0 5px;
   margin: 0 40px 0 0;
   font-size: 1.25rem;
   background-color: #dddddd;
   width: 3rem;
+  box-shadow: inset 0 4px 5px -1px rgba(0, 0, 0, 0.32), 0 0 5px 2px rgba(0, 0, 0, 0.32);
 }
 
 input[type=button] {
   cursor: pointer;
-  width: 6rem;
-  border: 2px solid var(--victory);
   margin-left: 2rem;
+  padding-bottom: 5px;
+  width: 6rem;
+  height: 2rem;
+  border-radius: 2px;
+  color: white;
+  background-color: #318b00;
+  box-shadow: inset 0 -4px 5px -1px rgba(0, 0, 0, 0.32), 0 0 5px 2px rgba(0, 0, 0, 0.32);
+  vertical-align: middle;
 }
 
 .field {
   position: relative;
   display: none;
   font-size: 12px;
-  border: 3px solid var(--silver);
+  border: 13px solid var(--dark);
   padding: 0;
   background-color: #eeeeee;
 }
@@ -52,7 +64,7 @@ input[type=button] {
 .cell {
   display: inline-flex;
   border: 1px solid #000000;
-  background-color: var(--silver);
+  background-color: #aaaaaa;
   height: 40px;
   width: 40px;
   padding: 0;
@@ -139,5 +151,4 @@ input[type=button] {
   --defeat: #b70000;
   --victory: #40b700;
   --dark: #292c30;
-  --silver: #aaaaaa;
 }
