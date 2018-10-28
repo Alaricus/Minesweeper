@@ -95,23 +95,19 @@ input[type=button] {
 }
 
 .buffer {
-  height: 20px;
+  height: 6rem;
+  background-color: #aaa815;
+  color: #ffffff;
+  font-size: 5rem;
+  margin-bottom: 20px;
 }
 
 .victory {
-  height: 6rem;
   background-color: var(--victory);;
-  color: #ffffff;
-  font-size: 5rem;
-  margin-bottom: 20px;
 }
 
 .defeat {
-  height: 6rem;
   background-color: var(--defeat);
-  color: #ffffff;
-  font-size: 5rem;
-  margin-bottom: 20px;
 }
 
 @keyframes spin {

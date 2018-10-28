@@ -12,6 +12,7 @@
 
   let board = [];
   let firstMove = true;
+  let timer = null;
 
   window.addEventListener('selectstart', (e) => { e.preventDefault(); }, false);
 
@@ -176,15 +177,17 @@
     });
 
     if (won) {
+      clearInterval(timer);
       playSound('victory');
       lockBoard(allCells);
       field.style.animation = 'spin 1s linear 1';
       buffer.classList.add('victory');
-      buffer.textContent = 'VICTORY!';
+      buffer.textContent = `VICTORY IN ${buffer.textContent}`;
     }
   };
 
   const handleDefeat = () => {
+    clearInterval(timer);
     playSound('defeat');
     const allCells = document.querySelectorAll('.cell');
     [...allCells].forEach((cell) => {
@@ -216,17 +219,34 @@
     audio.paused ? audio.play() : audio.currentTime = 0;
   };
 
+  const displayClock = () => {
+    buffer.textContent = '0:00';
+    clearInterval(timer);
+    let sec = 0;
+    let min = 0;
+
+    timer = setInterval(() => {
+      sec += 1;
+      if (sec === 60) {
+        min += 1;
+        sec = 0;
+      }
+      buffer.textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }, 1000);
+  };
+
   const init = (w, h) => {
     playSound('start');
 
     seed(w, h);
     placeRows();
     placeSquares();
+    displayClock();
 
     firstMove = true;
 
     field.style.animation = 'none';
-    buffer.textContent = '';
+
     if (buffer.classList.contains('victory')) { buffer.classList.remove('victory'); }
     if (buffer.classList.contains('defeat')) { buffer.classList.remove('defeat'); }
   };
