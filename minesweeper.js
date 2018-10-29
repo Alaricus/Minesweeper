@@ -42,8 +42,8 @@
   };
 
   const addMine = (w, h) => {
-    const row = Math.floor((Math.random() * (h - 1)));
-    const col = Math.floor((Math.random() * (w - 1)));
+    const row = Math.floor(Math.random() * h);
+    const col = Math.floor(Math.random() * w);
 
     if (board[row][col] === 0) {
       board[row][col] = 1;
