@@ -34,23 +34,27 @@
     init(width, height);
   }, false);
 
-  const seed = (w, h) => {
-    const mines = Math.ceil((w * h) * 0.1);
-    for (let i = 0; i < mines; i++) {
-      addMine(w, h);
-    }
-  };
+  const placeMines = (r, c) => {
+    const w = board[0].length;
+    const h = board.length;
+    const mines = Math.ceil((w * h) * 0.2);
+    let minesPlaced = 0;
 
-  const addMine = (w, h) => {
-    const row = Math.floor(Math.random() * h);
-    const col = Math.floor(Math.random() * w);
+    const clickArea = getValidNeighbors(r, c);
+    clickArea.push({ row: parseInt(r, 10), col: parseInt(c, 10) });
 
-    if (board[row][col] === 0) {
-      board[row][col] = 1;
-    } else {
-      addMine(w, h);
+    while (minesPlaced < mines) {
+      const row = Math.floor(Math.random() * h);
+      const col = Math.floor(Math.random() * w);
+      const cell = board[row][col];
+      const isValid = !clickArea.some(spot => spot.row === row && spot.col === col);
+
+      if (isValid && cell !== 1) {
+        board[row][col] = 1;
+        minesPlaced += 1;
+      }
     }
-  };
+  }
 
   const placeRows = () => {
     while (field.lastChild) {
@@ -90,10 +94,9 @@
     const col = parseInt(coords[2]);
     let cell = board[row][col];
 
-    if (firstMove && cell === 1) {
-      addMine(parseInt(dimensions[0].value), parseInt(dimensions[1].value));
-      board[row][col] = 0;
-      cell = 0;
+    if (firstMove) {
+      placeMines(row, col);
+      firstMove = false;
     }
 
     if (e.target.classList.contains('flag')) { return; }
@@ -112,8 +115,6 @@
       } else {
         playSound('warning');
       }
-
-      firstMove = false;
     }
 
     e.target.classList.remove('hover');
@@ -238,7 +239,6 @@
   const init = (w, h) => {
     playSound('start');
 
-    seed(w, h);
     placeRows();
     placeSquares();
     displayClock();
